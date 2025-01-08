@@ -99,16 +99,13 @@ class Authentication
             return null;
         }
 
-        try {
+    
             $sql = "SELECT id, username, email, role, bio, profile_picture_url 
                    FROM users WHERE id = :id LIMIT 1";
             $stmt = $this->connection->prepare($sql);
             $stmt->execute(['id' => $_SESSION['user_id']]);
 
             return $stmt->fetch(PDO::FETCH_ASSOC);
-        } catch (\PDOException $e) {
-            error_log("Error fetching user info: " . $e->getMessage());
-            return null;
-        }
+        
     }
 }
