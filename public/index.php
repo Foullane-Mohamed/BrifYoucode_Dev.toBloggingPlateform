@@ -6,8 +6,7 @@ use App\Models\Tag;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\article;
-use App\Crud\Crud;
-$auth = new Crud();
+
 // instance des class
 
 $article= new article();
@@ -60,8 +59,8 @@ foreach ($category_stats as $stat) {
 
 
 
-
-
+use App\Crud\Crud;
+$auth = new Crud();
 if (!$auth->isAuth()) {
   $role = $auth->getRole();
   echo $role;
@@ -84,9 +83,14 @@ if (!$auth->isAuth()) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
   $auth->logout();
-  header('Location: login.php');
+  header('Location: http://localhost/BrifYoucode_Dev.toBloggingPlateform/public/login.php');
   exit;
 }
+
+
+
+
+
 ?>
 
 
@@ -497,6 +501,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                     <a class="btn btn-primary" href="login.php">Logout</a>
+                    <input type="text">
                 </div>
             </div>
         </div>

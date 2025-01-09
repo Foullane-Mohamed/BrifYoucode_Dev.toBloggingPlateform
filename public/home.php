@@ -1,6 +1,28 @@
 <?php
 require '../vendor/autoload.php';
 use App\Models\article;
+use App\Crud\Crud;
+$auth = new Crud();
+
+if (!$auth->isAuth()) {
+  $role = $auth->getRole();
+  echo $role;
+  switch ($role) {
+    case 'admin':
+        header('location: http://localhost/BrifYoucode_Dev.toBloggingPlateform/public/index.php');
+        break;
+    case 'author':
+        header('Location: http://localhost/BrifYoucode_Dev.toBloggingPlateform/public/author.php');
+        break;
+    case 'user':
+        header('Location: http://localhost/BrifYoucode_Dev.toBloggingPlateform/public/home.php');
+        break;
+    default:
+        header('Location: http://localhost/BrifYoucode_Dev.toBloggingPlateform/public/login.php');
+        break;
+}
+
+}
 
 $article = new article();
 $publishedArticles = $article->getPublishedArticles();

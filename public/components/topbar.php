@@ -5,9 +5,29 @@ require '../vendor/autoload.php';
 
 use App\Crud\Crud;
 $auth = new Crud();
+if (!$auth->isAuth()) {
+  $role = $auth->getRole();
+  echo $role;
+  switch ($role) {
+    case 'admin':
+        header('location: http://localhost/BrifYoucode_Dev.toBloggingPlateform/public/index.php');
+        break;
+    case 'author':
+        header('Location: http://localhost/BrifYoucode_Dev.toBloggingPlateform/public/author.php');
+        break;
+    case 'user':
+        header('Location: http://localhost/BrifYoucode_Dev.toBloggingPlateform/public/home.php');
+        break;
+    default:
+        header('Location: http://localhost/BrifYoucode_Dev.toBloggingPlateform/public/login.php');
+        break;
+}
+
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
   $auth->logout();
-  header('Location: ../public/login.php');
+  header('Location: http://localhost/BrifYoucode_Dev.toBloggingPlateform/public/login.php');
   exit;
 }
 ?>
@@ -205,13 +225,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                     Activity Log
                 </a>
-                <div class="dropdown-divider"></div>
-                <!-- <a class="dropdown-item"  data-toggle="modal" data-target="#logoutModal">
-                </a> -->
-                <form action="../login.php" method="POST">
+                <!-- <div class="dropdown-divider">
+                <form action="topbar.php" method="POST">
                     <input type="submit" name='logout' value="Logout" class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400">
               </form>
-                    Logout
+                </div> -->
+                <!-- <a class="dropdown-item"  data-toggle="modal" data-target="#logoutModal">
+                </a> -->
+                <form action="index.php" method="POST">
+                    <!-- <input type="submit" name='logout' value="Logout" class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"> -->
+                    <input type="submit" name='logout'  value="Logout">
+              </form>
+                    
               
               
             </div>
