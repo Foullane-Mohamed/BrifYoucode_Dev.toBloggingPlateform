@@ -60,3 +60,15 @@ CREATE TABLE article_tags (
     CONSTRAINT fk_article_tags_tag FOREIGN KEY (tag_id) 
         REFERENCES tags (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+
+
+
+INSERT INTO users (username, email, password_hash, bio, profile_picture_url, role) 
+VALUES 
+('ahmed', 'test@test.com', 'admin', 'Bio of John Doe', 'http://example.com/john.jpg', 'admin');
+
+INSERT INTO categories (name) 
+VALUES ('Technology');

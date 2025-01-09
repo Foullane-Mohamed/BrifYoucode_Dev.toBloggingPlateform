@@ -1,4 +1,20 @@
+
+<?php
+require '../vendor/autoload.php';
+
+
+use App\Crud\Crud;
+$auth = new Crud();
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
+  $auth->logout();
+  header('Location: ../public/login.php');
+  exit;
+}
+?>
+
+
 <!-- Topbar -->
+
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
     <!-- Sidebar Toggle (Topbar) -->
@@ -190,10 +206,14 @@
                     Activity Log
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="public/login.php" data-toggle="modal" data-target="#logoutModal">
-                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                <!-- <a class="dropdown-item"  data-toggle="modal" data-target="#logoutModal">
+                </a> -->
+                <form action="../login.php" method="POST">
+                    <input type="submit" name='logout' value="Logout" class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400">
+              </form>
                     Logout
-                </a>
+              
+              
             </div>
         </li>
 

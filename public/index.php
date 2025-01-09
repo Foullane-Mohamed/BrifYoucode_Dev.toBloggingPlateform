@@ -1,11 +1,13 @@
 <?php
 
 require '../vendor/autoload.php';
+session_start();
 use App\Models\Tag;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\article;
-
+use App\Crud\Crud;
+$auth = new Crud();
 // instance des class
 
 $article= new article();
@@ -47,6 +49,48 @@ foreach ($category_stats as $stat) {
     $categories[] = $stat['category_name'];
     $counts[] = $stat['article_count'];
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+if (!$auth->isAuth()) {
+  $role = $auth->getRole();
+  echo $role;
+  switch ($role) {
+    case 'admin':
+        header('location: http://localhost/BrifYoucode_Dev.toBloggingPlateform/public/index.php');
+        break;
+    case 'author':
+        header('Location: http://localhost/BrifYoucode_Dev.toBloggingPlateform/public/author.php');
+        break;
+    case 'user':
+        header('Location: http://localhost/BrifYoucode_Dev.toBloggingPlateform/public/home.php');
+        break;
+    default:
+        header('Location: http://localhost/BrifYoucode_Dev.toBloggingPlateform/public/login.php');
+        break;
+}
+
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
+  $auth->logout();
+  header('Location: login.php');
+  exit;
+}
+?>
+
+
+
 
 ?>
 
