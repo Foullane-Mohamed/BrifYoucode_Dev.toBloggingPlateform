@@ -68,7 +68,7 @@ CREATE TABLE article_tags (
 
 INSERT INTO users (username, email, password_hash, bio, profile_picture_url, role) 
 VALUES 
-('ahmed', 'test@test.com', 'admin', 'Bio of John Doe', 'http://example.com/john.jpg', 'admin');
+('author', 'author@author.com', 'author', 'Bio of John Doe', 'http://example.com/john.jpg', 'author');
 
 INSERT INTO categories (name) 
 VALUES ('Technology');

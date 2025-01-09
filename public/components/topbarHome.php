@@ -1,3 +1,38 @@
+
+<?php
+require '../vendor/autoload.php';
+
+
+use App\Crud\Crud;
+$auth = new Crud();
+if (!$auth->isAuth()) {
+  $role = $auth->getRole();
+  echo $role;
+  switch ($role) {
+    case 'admin':
+        header('location: http://localhost/BrifYoucode_Dev.toBloggingPlateform/public/index.php');
+        break;
+    case 'author':
+        header('Location: http://localhost/BrifYoucode_Dev.toBloggingPlateform/public/author.php');
+        break;
+    case 'user':
+        header('Location: http://localhost/BrifYoucode_Dev.toBloggingPlateform/public/home.php');
+        break;
+    default:
+        header('Location: http://localhost/BrifYoucode_Dev.toBloggingPlateform/public/login.php');
+        break;
+}
+
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
+  $auth->logout();
+  header('Location: http://localhost/BrifYoucode_Dev.toBloggingPlateform/public/login.php');
+  exit;
+}
+?>
+
+
 <!-- Topbar -->
 <nav class="navbar navbar-expand navbar-light bg-white topbar static-top shadow">
     <!-- Logo -->
